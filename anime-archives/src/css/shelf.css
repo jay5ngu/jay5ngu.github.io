@@ -1,0 +1,6 @@
+.shelf {
+  display: flex;
+  max-width: 680px;
+  gap: 10px;
+  overflow-x: auto;
+}

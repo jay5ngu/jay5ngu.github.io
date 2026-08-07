@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700&display=swap');
+
+.bookStage {
+    perspective: 2400px;
+    margin-bottom: 24px;
+    max-width: 680px;
+}
+
+.book {
+    position: relative;
+    aspect-ratio: 16 / 9.2;
+}
+
+.cover {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.15, 1);
+    border-radius: 6px;
+}
+
+.coverFront,
+.coverBack {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 6px;
+}
+
+.coverFront {
+    background: linear-gradient(150deg, #7A2E38 0%, #551F26 100%);
+    color: #E7C989;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px;
+    text-align: center;
+}
+
+.coverFront h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.coverFront p {
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(231, 201, 137, 0.7);
+}
+
+.coverFront::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1.5px solid rgba(231, 201, 137, 0.5);
+    border-radius: 4px;
+}
+
+.coverBack {
+    background: #4a3826;
+    transform: rotateY(180deg);
+}
+
+.anime {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.5);
+}
+
+.anime img {
+    /* width: 160px; */
+    /* height: 220px; */
+    /* object-fit: cover; */
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.leftPage {
+    flex: 0 0 42%;
+    background: linear-gradient(160deg, #7A2E38 0%, #551F26 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.leftPage::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(231, 201, 137, 0.4);
+    border-radius: 3px;
+}
+
+.leftPage img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.rightPage {
+    flex: 1;
+    background: #EFE3CB;
+    color: #241A11;
+    padding: 22px 26px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.rightPage::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 14px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.05));
+}
+
+.rightPage h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: #8C6B37;
+}
+
+.rightPage .meta {
+    font-family: monospace;
+    font-size: 12px;
+    color: #5B4E33;
+    margin-bottom: 10px;
+}
+
+.rightPage .synopsis {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #3A2E1B;
+}
