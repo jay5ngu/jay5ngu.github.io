@@ -1,6 +1,59 @@
 .shelf {
   display: flex;
   max-width: 680px;
+  margin: 0 auto;
   gap: 10px;
   overflow-x: auto;
+  scroll-snap-type: x proximity; /* makes scrolling settle cleanly on a thumbnail instead of stopping mid-item. */
+  padding: 6px 4px 16px;
+  border-top: 3px solid #8C6B37; /* visual "shelf ledge" separating the carousel from the book above it */
+}
+
+.shelf section {
+  width: 90px;
+  flex-shrink: 0;
+  text-align: center;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.shelf section button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #EFE3CB;
+  font-size: 12px;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+.shelf section img {
+  width: 90px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shelf section:hover img {
+  transform: translateY(-4px); /* lift the thumbnail up a bit on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.shelf section.active img {
+  outline: 2px solid #C6994F;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* custom thin scrollbar instead of the browser default */
+.shelf::-webkit-scrollbar {
+  height: 8px;
+}
+.shelf::-webkit-scrollbar-track {
+  background: transparent;
+}
+.shelf::-webkit-scrollbar-thumb {
+  background: #4a3826;
+  border-radius: 4px;
 }

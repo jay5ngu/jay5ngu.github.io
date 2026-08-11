@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700&display=swap');
 
+/* Main container for the book and its pages */
 .bookStage {
     perspective: 2400px;
     margin-bottom: 24px;
     max-width: 680px;
+    overflow: hidden;
+    border-radius: 6px;
 }
 
 .book {
@@ -11,18 +14,19 @@
     aspect-ratio: 16 / 9.2;
 }
 
+/* The cover of the book, which can be flipped to reveal the content inside */
 .cover {
     position: absolute;
     inset: 0;
     cursor: pointer;
     transform-origin: left center;
     transform-style: preserve-3d;
-    transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.15, 1);
+    transition: transform 1.25s cubic-bezier(0.45, 0.05, 0.15, 1);
     border-radius: 6px;
 }
 
-.coverFront,
-.coverBack {
+/* .coverBack, */
+.coverFront {
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
@@ -65,11 +69,30 @@
     border-radius: 4px;
 }
 
-.coverBack {
+/* .coverBack {
     background: #4a3826;
     transform: rotateY(180deg);
+}  */
+
+/* Action button to close the book */
+.closeBook {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #7A6A4A;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
 }
 
+.closeBook:hover {
+  color: #241A11;
+}
+
+/* The content of the book, which includes the left and right pages */
 .anime {
     position: absolute;
     inset: 0;
@@ -80,9 +103,6 @@
 }
 
 .anime img {
-    /* width: 160px; */
-    /* height: 220px; */
-    /* object-fit: cover; */
     border-radius: 4px;
     flex-shrink: 0;
 }
@@ -128,7 +148,7 @@
     top: 0;
     bottom: 0;
     width: 14px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.05));
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.05)); /* subtle shadow on the left edge of the right page to give it depth */
 }
 
 .rightPage h2 {

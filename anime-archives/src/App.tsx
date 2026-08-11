@@ -17,9 +17,9 @@ function App() {
 
   return (
     <>
-      <section id="center">
+      <section className="page">
         {/* Website Title */}
-        <div>
+        <div className="header">
           <h1>Anime Archives</h1>
           <p>{myAnimeList.length} titles on the shelf</p>
         </div>
@@ -33,6 +33,7 @@ function App() {
                 <img src={selectedAnime.coverImage.large} alt={selectedAnime.title.english} />
               </div>
               <div className='rightPage'>
+                <button className="closeBook" onClick={() => setIsOpen(false)}>✕</button>
                 <h2>{selectedAnime.title.english}</h2>
                 <p className='meta'>Released {selectedAnime.startDate}</p>
                 <p className='synopsis'>{selectedAnime.description}</p>
@@ -45,8 +46,7 @@ function App() {
                 <h1>{selectedAnime.title.english}</h1>
                 <p>click to open</p>
               </div>
-              {/* Click this div to close book */}
-              <div className="coverBack"></div>
+              {/* <div className="coverBack"></div>  */}
             </div>
           </div>
         </div>
