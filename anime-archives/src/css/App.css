@@ -1,3 +1,4 @@
+/* Default styles for the entire application */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,6 +11,15 @@ body {
   color: #EFE3CB;
   padding: 24px;
 } 
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
 
 .header h1 {
   margin-bottom: 4px;
@@ -24,6 +34,7 @@ body {
   margin-bottom: 24px;
 }
 
+/* Page container for the main content */
 .page {
   max-width: 720px;
   margin: 0 auto;
@@ -33,4 +44,70 @@ body {
   font-size: 13px;
   color: #8C6B37;
   margin-bottom: 24px;
+}
+
+/* Search bar styles */
+.searchWrap {
+  position: relative;
+  width: 280px;
+  max-width: 100%;
+}
+
+.searchWrap input {
+  width: 100%;
+  background: #1a120c;
+  border: 1px solid #5A4530;
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #EFE3CB;
+  font-size: 13px;
+  outline: none;
+}
+
+.searchWrap input:focus {
+  border-color: #C6994F;
+}
+
+.searchWrap input::placeholder {
+  color: #A9906A;
+}
+
+.searchResults {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #EFE3CB;
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.searchResult {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: 1px dashed #C9BB98;
+  padding: 10px 14px;
+  color: #241A11;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.searchResult:first-child {
+  border-top: none;
+}
+
+.searchResult:hover {
+  background: rgba(122, 46, 56, 0.08);
+}
+
+.noResults {
+  padding: 14px;
+  color: #241A11;
+  opacity: 0.6;
+  font-size: 13px;
 }

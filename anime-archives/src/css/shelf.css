@@ -1,3 +1,4 @@
+/* Main container for shelf */
 .shelf {
   display: flex;
   max-width: 680px;
@@ -15,35 +16,127 @@
   text-align: center;
   cursor: pointer;
   scroll-snap-align: start;
+  padding-top: 6px;
+}
+
+.shelf section .title {
+  font-size: 12px;
+  color: #EFE3CB;
+  padding-top: 6px;
+  display: block;
 }
 
 .shelf section button {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   background: none;
   border: none;
-  color: #EFE3CB;
-  font-size: 12px;
-  padding-top: 6px;
   cursor: pointer;
+  padding: 0;
 }
 
-.shelf section img {
-  width: 90px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 4px;
+/* Display the book cover image on the shelf */
+.shelf section .coverImage {
+  position: relative;
+  border-radius: 2px 6px 6px 2px;
+  overflow: hidden;
+  box-shadow:
+    inset 6px 0 8px -4px rgba(0, 0, 0, 0.6),
+    2px 3px 6px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.shelf section:hover img {
-  transform: translateY(-4px); /* lift the thumbnail up a bit on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+.shelf section .coverImage img {
+  display: block;
+  width: 90px;
+  height: 130px;
+  object-fit: cover;
 }
 
-.shelf section.active img {
-  outline: 2px solid #C6994F;
+/* foil lines, like the brass detailing on the book cover */
+.shelf section .coverImage::before,
+.shelf section .coverImage::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 8px;
+  height: 2px;
+  background: rgba(231, 201, 137, 0.6);
+  pointer-events: none;
+}
+.shelf section .coverImage::before { top: 8px; }
+.shelf section .coverImage::after { bottom: 8px; }
+
+
+/* Make book look like it's lifting off the shelf when hovered or selected */
+.shelf section:hover .coverImage,
+.shelf section.active .coverImage {
   transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 6px 0 8px -4px rgba(0, 0, 0, 0.6),
+    3px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Highlight the selected book on the shelf with a highlight */
+.shelf section.active .coverImage {
+  outline: 2px solid #C6994F;
+}
+
+/* Display the book spine on the shelf */
+
+/* .shelf section {
+  width: 54px;
+} */
+
+.shelf section .spine {
+  position: relative;
+  width: 54px;
+  height: 210px;
+  border-radius: 3px 3px 2px 2px;
+  background: linear-gradient(180deg, #7A2E38 0%, #551F26 100%);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* foil lines near top and bottom, same idea as the cover version */
+.shelf section .spine::before,
+.shelf section .spine::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: rgba(231, 201, 137, 0.55);
+}
+.shelf section .spine::before { top: 10px; }
+.shelf section .spine::after { bottom: 10px; }
+
+.shelf section .spineTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #E7C989;
+  white-space: nowrap;
+  max-height: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shelf section:hover .spine,
+.shelf section.active .spine {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.45);
+}
+
+.shelf section.active .spine {
+  outline: 2px solid #C6994F;
 }
 
 /* custom thin scrollbar instead of the browser default */

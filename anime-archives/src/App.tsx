@@ -15,13 +15,56 @@ function App() {
   // For open book animation
   const [isOpen, setIsOpen] = useState(false)
 
+  // For book shelf display
+  const [isCoverImage, setIsCoverImage] = useState(false)
+
+  // For search bar functionality
+  const [query, setQuery] = useState('')
+  const [searchFocused, setSearchFocused] = useState(false)
+  const searchResults = query.trim() ? myAnimeList.filter((show) =>
+      show.title.english.toLowerCase().includes(query.trim().toLowerCase())
+    ) : []
+
   return (
     <>
       <section className="page">
-        {/* Website Title */}
         <div className="header">
-          <h1>Anime Archives</h1>
-          <p>{myAnimeList.length} titles on the shelf</p>
+          {/* Website Title */}
+          <div className="headerText">
+            <h1>Anime Archives</h1>
+            <p>{myAnimeList.length} titles in your library</p>
+          </div>
+          {/* Search Bar */}
+          <div className="searchWrap">
+            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setSearchFocused(true)} 
+              onBlur={() => setTimeout(() => setSearchFocused(false), 150)} 
+              placeholder="Search the stacks…" />
+          
+            {/* Search Results */}
+            {searchFocused && query && (
+              <div className="searchResults">
+                {searchResults.length === 0 ? (
+                  <p className="noResults">No matches in your library.</p>
+                ) : (
+                  searchResults.map((show) => (
+                    <button
+                      key={show.id}
+                      className="searchResult"
+                      onClick={() => {
+                        setSelectedAnime(show)
+                        setSelectedId(show.id)
+                        // setIsOpen(false)
+                        setQuery("")
+                      }}
+                    >
+                      {show.title.english}
+                    </button>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Selected Anime/Show Book Info */}
@@ -33,6 +76,7 @@ function App() {
                 <img src={selectedAnime.coverImage.large} alt={selectedAnime.title.english} />
               </div>
               <div className='rightPage'>
+                {/* Button updates the isOpen state andtriggers the close functionality */}
                 <button className="closeBook" onClick={() => setIsOpen(false)}>✕</button>
                 <h2>{selectedAnime.title.english}</h2>
                 <p className='meta'>Released {selectedAnime.startDate}</p>
@@ -54,18 +98,31 @@ function App() {
         {/* Shelf Anime/Show Selection */}
         <div className='shelf'>
           {myAnimeList.map((show) => (
-            <section key={show.id} className={show.id === selectedId ? "active" : ""}>
+            <section key={show.id} className={show.id === selectedId ? "active" : ""} style={{ width: isCoverImage ? '90px' : '54px' }}>
               <button onClick={() => {
-                setSelectedAnime(show)
-                setSelectedId(show.id)
-                // setIsOpen(false)
+                setSelectedAnime(show) // Set information for the selected anime
+                setSelectedId(show.id) // Identify what to highlight for the selected anime on the shelf
               }}>
-                <img src={show.coverImage.medium} alt={show.title.english} />
-                {show.title.english}
+
+                {/* Display book shelf as anime cover image */}
+                <div style={{ display: isCoverImage ? 'block' : 'none' }}>
+                  <div className='coverImage'>
+                    <img src={show.coverImage.medium} alt={show.title.english} />
+                  </div>
+                  <span>{show.title.english}</span>
+                </div>
+
+                {/* Display book shelf as book spine */}
+                <div className="spine" style={{ display: !isCoverImage ? 'block' : 'none' }}>
+                  <span className="spineTitle">{show.title.english}</span>
+                </div>
               </button>
             </section>
           ))}
         </div>
+        <label> Cover Image 
+          <input type="checkbox" onChange={() => setIsCoverImage(!isCoverImage)} />
+        </label>
       </section>
 
     </>

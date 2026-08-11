@@ -9,6 +9,7 @@
     border-radius: 6px;
 }
 
+/* Container for the book, which includes the cover and the content inside */
 .book {
     position: relative;
     aspect-ratio: 16 / 9.2;
