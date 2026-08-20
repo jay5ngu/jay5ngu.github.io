@@ -15,7 +15,7 @@ export interface Show {
   id: number;
   title: title;
   // kind: "Anime" | "TV";
-  description: string;
   startDate: string;
   coverImage: coverImage;
+  description: string;
 }

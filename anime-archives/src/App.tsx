@@ -1,30 +1,67 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './css/App.css'
 import './css/book.css'
 import './css/shelf.css'
+import { type Show } from './types/shows'
 
 // Sample Backend Data (REMOVE LATER)
-import animeList from './api/sample-data/myShows.json'
+// import animeList from './api/sample-data/myShows.json'
+
+// User's anime collection
+const [myAnimeList, setMyAnimeList] = useState<Show[]>([])
+
+// Check if page is still loading
+const [isLoading, setIsLoading] = useState(true)
+
+// Anime selection and shelf
+const [selectedAnime, setSelectedAnime] = useState<Show | null>(null)
+const [selectedId, setSelectedId] = useState<number | null>(null)
+
+// For open book animation
+const [isOpen, setIsOpen] = useState(false)
+
+// For book shelf display
+const [isCoverImage, setIsCoverImage] = useState(false)
+
+// For search bar functionality
+const [query, setQuery] = useState('')
+const [searchFocused, setSearchFocused] = useState(false)
+const searchResults = query.trim() ? myAnimeList.filter((show) =>
+    show.title.english.toLowerCase().includes(query.trim().toLowerCase())
+  ) : []
+
+// Backend API call to get user's shows
+useEffect(() => {
+  // Resolves to '/api/myShows' in dev, and 'https://yourdomain.com' in prod
+  console.log(`${import.meta.env.VITE_API_BASE_URL}/myShows`)
+  const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/myShows`;
+  const payload = {
+    user_id: 9
+  }
+
+  fetch(apiUrl, {
+    headers: {
+      'Content-Type': 'application/json', // Alert server that data is JSON
+    },
+    body: JSON.stringify(payload), // Convert object to JSON string})
+  })
+      .then((res) => res.json())
+      .then((data: Show[]) => {
+        setMyAnimeList(data)
+        if (data.length > 0) {
+          setSelectedAnime(data[0])
+          setSelectedId(data[0].id)
+        }
+      })
+      .catch((err) => console.error('Error fetching users:', err))
+      .finally(() => setIsLoading(false));
+
+
+}, [])
 
 function App() {
-  // Anime selection and shelf
-  const [selectedAnime, setSelectedAnime] = useState(animeList[0])
-  const [selectedId, setSelectedId] = useState(animeList[0].id)
-  const [myAnimeList, setMyAnimeList] = useState(animeList)
-
-  // For open book animation
-  const [isOpen, setIsOpen] = useState(false)
-
-  // For book shelf display
-  const [isCoverImage, setIsCoverImage] = useState(false)
-
-  // For search bar functionality
-  const [query, setQuery] = useState('')
-  const [searchFocused, setSearchFocused] = useState(false)
-  const searchResults = query.trim() ? myAnimeList.filter((show) =>
-      show.title.english.toLowerCase().includes(query.trim().toLowerCase())
-    ) : []
-
+  if (isLoading) return <div>Loading your archive…</div>
+  if (!selectedAnime) return <div>No shows in your library yet.</div>
   return (
     <>
       <section className="page">
