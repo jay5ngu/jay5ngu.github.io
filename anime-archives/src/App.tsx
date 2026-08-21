@@ -3,6 +3,7 @@ import './css/App.css'
 import './css/book.css'
 import './css/shelf.css'
 import { type Show } from './types/shows'
+import { hexToPastel, getSpineTextColor } from './helper/hexColor'
 
 function App() {
   // User login tracker
@@ -177,8 +178,12 @@ function App() {
                 </div>
 
                 {/* Display book shelf as book spine */}
-                <div className="spine" style={{ display: !isCoverImage ? 'block' : 'none' }}>
-                  <span className="spineTitle">{show.title.english}</span>
+                <div className="spine" style={{ 
+                  display: !isCoverImage ? 'block' : 'none' , 
+                  '--spine-color': hexToPastel(show.coverImage.color, 55, 82),
+                  '--spine-color-dark': hexToPastel(show.coverImage.color, 55, 68)
+                } as React.CSSProperties}>
+                  <span className="spineTitle" style={{'--spine-text-color': getSpineTextColor(show.coverImage.color)} as React.CSSProperties}>{show.title.english}</span>
                 </div>
               </button>
             </section>

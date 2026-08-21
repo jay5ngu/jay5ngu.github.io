@@ -135,12 +135,9 @@
   box-shadow:
     inset 6px 0 8px -4px rgba(0, 0, 0, 0.6),
     3px 5px 10px rgba(0, 0, 0, 0.5);
+    outline: 2px solid #C6994F; /* Highlight the selected book on the shelf with a highlight */
 }
 
-/* Highlight the selected book on the shelf with a highlight */
-.shelf section.active .coverImage {
-  outline: 2px solid #C6994F;
-}
 
 /* Display the book spine on the shelf */
 
@@ -153,7 +150,11 @@
   width: 54px;
   height: 210px;
   border-radius: 3px 3px 2px 2px;
-  background: linear-gradient(180deg, #7A2E38 0%, #551F26 100%);
+  background: linear-gradient(
+    180deg, 
+    var(--spine-color,#7A2E38) 0%,
+    var(--spine-color-dark, #551F26) 100%
+  );
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -181,7 +182,7 @@
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.02em;
-  color: #E7C989;
+  color: var(--spine-text-color, #E7C989);
   white-space: nowrap;
   max-height: 190px;
   overflow: hidden;
@@ -192,9 +193,6 @@
 .shelf section.active .spine {
   transform: translateY(-8px);
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.45);
-}
-
-.shelf section.active .spine {
   outline: 2px solid #C6994F;
 }
 
