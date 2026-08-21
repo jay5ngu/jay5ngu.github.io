@@ -14,11 +14,11 @@ body {
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* center; */
   justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 26px;
+  /* gap: 20px; */
+  /* flex-wrap: wrap; */
+  margin-bottom: 16px /* 26px; */
 }
 
 .header h1 {
@@ -34,6 +34,32 @@ body {
   margin-bottom: 24px;
 }
 
+/* Styling for login content */
+.authArea {
+  display: flex;
+  align-items: center;
+}
+
+.welcomeText {
+  font-size: 13px;
+  color: #C6994F;
+}
+
+.loginButton {
+  background: none;
+  border: 1px solid #5A4530;
+  border-radius: 6px;
+  padding: 7px 14px;
+  color: #EFE3CB;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  border-color: #C6994F;
+  color: #C6994F;
+}
+
 /* Page container for the main content */
 .page {
   max-width: 720px;
@@ -47,10 +73,17 @@ body {
 }
 
 /* Search bar styles */
+.actionsRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
 .searchWrap {
-  position: relative;
+  /* position: relative;
   width: 280px;
-  max-width: 100%;
+  max-width: 100%; */
+  flex: 1;
 }
 
 .searchWrap input {
@@ -110,4 +143,23 @@ body {
   color: #241A11;
   opacity: 0.6;
   font-size: 13px;
+}
+
+/* Add show button styling */
+.addShowButton {
+  background: none;
+  border: 1px solid #5A4530;
+  border-radius: 6px;
+  padding: 9px 16px;
+  color: #C6994F;
+  font-size: 13px;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.addShowButton:hover {
+  border-color: #C6994F;
+  background: rgba(198, 153, 79, 0.08);
 }

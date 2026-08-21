@@ -5,6 +5,9 @@ import './css/shelf.css'
 import { type Show } from './types/shows'
 
 function App() {
+  // User login tracker
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+
   // User's anime collection
   const [myAnimeList, setMyAnimeList] = useState<Show[]>([])
 
@@ -66,6 +69,18 @@ function App() {
             <h1>Anime Archives</h1>
             <p>{myAnimeList.length} titles in your library</p>
           </div>
+          {/* Login */}
+          <div className="authArea">
+            {isLoggedIn ? (
+              <span className="welcomeText">Welcome, USERNAME</span>
+            ) : (
+              <button className="loginButton">Login</button>
+            )}
+          </div>
+        </div>
+
+        {/* Search Bar and Adding Shows */}
+        <div className="actionsRow">
           {/* Search Bar */}
           <div className="searchWrap">
             <input type="text" value={query} onChange={(e) => setQuery(e.target.value)}
@@ -97,6 +112,8 @@ function App() {
               </div>
             )}
           </div>
+
+          <button className="addShowButton">+ Add Show</button>
         </div>
 
         {/* Selected Anime/Show Book Info */}
@@ -127,6 +144,21 @@ function App() {
           </div>
         </div>
 
+        {/* Toggle Shelf to display book spines or show cover images */}
+        <div className="shelfHeader">
+          <span className="shelfLabel">On the shelf</span>
+          <label className="viewToggle">
+            <span className={!isCoverImage ? "toggleActive" : ""}>Spine</span>
+            <input
+              type="checkbox"
+              checked={isCoverImage} // pre-selects check on first compilation
+              onChange={() => setIsCoverImage(!isCoverImage)}
+            />
+            <span className="toggleTrack"><span className="toggleThumb" /></span>
+            <span className={isCoverImage ? "toggleActive" : ""}>Cover</span>
+          </label>
+        </div>
+
         {/* Shelf Anime/Show Selection */}
         <div className='shelf'>
           {myAnimeList.map((show) => (
@@ -152,9 +184,6 @@ function App() {
             </section>
           ))}
         </div>
-        <label> Cover Image 
-          <input type="checkbox" onChange={() => setIsCoverImage(!isCoverImage)} />
-        </label>
       </section>
 
     </>
