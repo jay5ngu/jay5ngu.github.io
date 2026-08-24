@@ -4,6 +4,7 @@ import './css/book.css'
 import './css/shelf.css'
 import { type Show } from './types/shows'
 import { hexToPastel, getSpineTextColor } from './helper/hexColor'
+import type { API } from './types/api'
 
 function App() {
   // User login tracker
@@ -45,12 +46,23 @@ function App() {
       },
       body: JSON.stringify(payload), // Convert object to JSON string})
     })
-        .then((res) => res.json())
-        .then((data: Show[]) => {
-          setMyAnimeList(data)
-          if (data.length > 0) {
-            setSelectedAnime(data[0])
-            setSelectedId(data[0].id)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Request failed with status ${res.status}`);
+          }
+          return res.json()
+        })
+        .then((data: API) => {
+          if (!data.success) {
+            throw new Error(data.message || 'Unknown API error');
+          }
+          return data.data
+        })
+        .then((shows: Show[]) => {
+          setMyAnimeList(shows)
+          if (shows.length > 0) {
+            setSelectedAnime(shows[0])
+            setSelectedId(shows[0].id)
           }
         })
         .catch((err) => console.error('Error fetching users:', err))

@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // FastAPI server (set to local environment but update later)
+        target: 'http://localhost:8000', // FastAPI server (set to local environment but update later)
         changeOrigin: true,
         secure: false,
         // Rewrite /api/[endpoint] to /[endpoint] if your FastAPI paths do not include /api (ex. /api/users to /users)
