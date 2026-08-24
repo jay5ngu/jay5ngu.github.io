@@ -80,8 +80,8 @@ body {
 }
 
 .searchWrap {
-  /* position: relative;
-  width: 280px;
+  position: relative;
+  /* width: 280px;
   max-width: 100%; */
   flex: 1;
 }

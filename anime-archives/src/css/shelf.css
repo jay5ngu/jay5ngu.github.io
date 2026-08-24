@@ -113,6 +113,19 @@
   object-fit: cover;
 }
 
+.shelf section .title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #EFE3CB;
+  padding-top: 6px;
+  display: block;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* foil lines, like the brass detailing on the book cover */
 .shelf section .coverImage::before,
 .shelf section .coverImage::after {

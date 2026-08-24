@@ -186,7 +186,7 @@ function App() {
                   <div className='coverImage'>
                     <img src={show.coverImage.medium} alt={show.title.english} />
                   </div>
-                  <span>{show.title.english}</span>
+                  <span className='title'>{show.title.english}</span>
                 </div>
 
                 {/* Display book shelf as book spine */}
