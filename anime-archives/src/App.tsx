@@ -3,8 +3,8 @@ import './css/App.css'
 import './css/book.css'
 import './css/shelf.css'
 import { type Show } from './types/shows'
-import { hexToPastel, getSpineTextColor } from './helper/hexColor'
 import type { API } from './types/api'
+import { hexToPastel, getSpineTextColor } from './helper/hexColor'
 
 function App() {
   // User login tracker
