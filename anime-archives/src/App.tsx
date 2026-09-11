@@ -16,6 +16,9 @@ function App() {
   // Check if page is still loading
   const [isLoading, setIsLoading] = useState(true)
 
+  // Check if error occured from backend API
+  const [isError, setIsError] = useState(false)
+
   // Anime selection and shelf
   const [selectedAnime, setSelectedAnime] = useState<Show | null>(null)
   const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -65,13 +68,17 @@ function App() {
             setSelectedId(shows[0].id)
           }
         })
-        .catch((err) => console.error('Error fetching users:', err))
+        .catch((err) => {
+          setIsError(true)
+          console.error('Error fetching users:', err)
+        })
         .finally(() => setIsLoading(false));
 
 
   }, [])
 
   if (isLoading) return <div>Loading your archive…</div>
+  if (isError) return <div>Error while trying to read from backend server</div>
   if (!selectedAnime) return <div>No shows in your library yet.</div>
   return (
     <>
