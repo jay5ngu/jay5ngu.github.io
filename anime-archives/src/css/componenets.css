@@ -1,0 +1,17 @@
+.stateScreen {
+  max-width: 480px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.stateScreen h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.stateScreen p {
+  color: #8C6B37;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

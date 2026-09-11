@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
+// CSS Styling
 import './css/App.css'
 import './css/book.css'
 import './css/shelf.css'
+import './css/componenets.css'
+// Data Structure
 import { type Show } from './types/shows'
 import type { API } from './types/api'
 import { hexToPastel, getSpineTextColor } from './helper/hexColor'
+// HTML layouts
+import EmptyLibrary from './componenets/EmptyLibrary'
+import ErrorScreen from './componenets/Error'
 
 function App() {
   // User login tracker
@@ -18,6 +24,7 @@ function App() {
 
   // Check if error occured from backend API
   const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   // Anime selection and shelf
   const [selectedAnime, setSelectedAnime] = useState<Show | null>(null)
@@ -70,6 +77,9 @@ function App() {
         })
         .catch((err) => {
           setIsError(true)
+          setErrorMessage(
+            err instanceof Error ? err.message : 'An unexpected error occurred'
+          )
           console.error('Error fetching users:', err)
         })
         .finally(() => setIsLoading(false));
@@ -78,8 +88,6 @@ function App() {
   }, [])
 
   if (isLoading) return <div>Loading your archive…</div>
-  if (isError) return <div>Error while trying to read from backend server</div>
-  if (!selectedAnime) return <div>No shows in your library yet.</div>
   return (
     <>
       <section className="page">
@@ -139,29 +147,34 @@ function App() {
         {/* Selected Anime/Show Book Info */}
         <div className="bookStage">
           {/* Content inside the book */}
-          <div className="book">
-            <div className="anime">
-              <div className='leftPage'>
-                <img src={selectedAnime.coverImage.large} alt={selectedAnime.title.english} />
+          {isError ? (
+            <ErrorScreen errorMessage={errorMessage} onRetry={() => window.location.reload()} />
+          ) : selectedAnime ? (
+            <div className="book">
+              <div className="anime">
+                <div className='leftPage'>
+                  <img src={selectedAnime.coverImage.large} alt={selectedAnime.title.english} />
+                </div>
+                <div className='rightPage'>
+                  {/* Button updates the isOpen state andtriggers the close functionality */}
+                  <button className="closeBook" onClick={() => setIsOpen(false)}>✕</button>
+                  <h2>{selectedAnime.title.english}</h2>
+                  <p className='meta'>Released {selectedAnime.startDate}</p>
+                  <p className='synopsis'>{selectedAnime.description}</p>
+                </div>
               </div>
-              <div className='rightPage'>
-                {/* Button updates the isOpen state andtriggers the close functionality */}
-                <button className="closeBook" onClick={() => setIsOpen(false)}>✕</button>
-                <h2>{selectedAnime.title.english}</h2>
-                <p className='meta'>Released {selectedAnime.startDate}</p>
-                <p className='synopsis'>{selectedAnime.description}</p>
-              </div>
-            </div>
 
-            {/* Front of Page with open/close functionality */}
-            <div className="cover" style={{ transform: isOpen ? 'rotateY(-150deg) translateZ(0)' : 'rotateY(0deg) translateZ(0)' }} onClick={() => setIsOpen(!isOpen)}>
-              <div className="coverFront">
-                <h1>{selectedAnime.title.english}</h1>
-                <p>click to open</p>
+              {/* Front of Page with open/close functionality */}
+              <div className="cover" style={{ transform: isOpen ? 'rotateY(-150deg) translateZ(0)' : 'rotateY(0deg) translateZ(0)' }} onClick={() => setIsOpen(!isOpen)}>
+                <div className="coverFront">
+                  <h1>{selectedAnime.title.english}</h1>
+                  <p>click to open</p>
+                </div>
+                {/* <div className="coverBack"></div>  */}
               </div>
-              {/* <div className="coverBack"></div>  */}
             </div>
-          </div>
+          ) : (<EmptyLibrary />)}
+            
         </div>
 
         {/* Toggle Shelf to display book spines or show cover images */}
