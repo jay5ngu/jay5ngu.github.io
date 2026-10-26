@@ -8,8 +8,8 @@ import type { API } from '../types/api'
 import { hexToPastel, getSpineTextColor } from '../helper/hexColor'
 
 // HTML layouts
-import EmptyLibrary from '../componenets/EmptyLibrary'
-import ErrorScreen from '../componenets/Error'
+import EmptyLibrary from './EmptyLibrary'
+import ErrorScreen from './Error'
 
 export default function Home() {
   // User login tracker
@@ -138,7 +138,7 @@ export default function Home() {
           )}
         </div>
 
-        <button className="addShowButton">+ Add Show</button>
+        <Link to="/addShow" className="addShowButton">+ Add Show</Link>
       </div>
 
       {/* Selected Anime/Show Book Info */}

@@ -8,12 +8,14 @@ import './css/componenets.css'
 
 import Home from './componenets/Home'
 import LoginScreen from './componenets/Login'
+import AddShow from './componenets/AddShow'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/addShow" element={<AddShow />} />
     </Routes>
   )
 }

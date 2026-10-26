@@ -1,0 +1,46 @@
+.browseResults {
+  margin-top: 10px;
+}
+
+.browseStatus {
+  color: #8C6B37;
+  font-size: 14px;
+  padding: 20px 4px;
+}
+
+.browseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 18px;
+}
+
+.browseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.browseCard img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.browseTitle {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.browseCard .addShowButton {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.browseCard .addShowButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
