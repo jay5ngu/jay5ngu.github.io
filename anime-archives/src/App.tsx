@@ -6,9 +6,9 @@ import './css/book.css'
 import './css/shelf.css'
 import './css/componenets.css'
 
-import Home from './componenets/Home'
-import LoginScreen from './componenets/Login'
-import AddShow from './componenets/AddShow'
+import Home from './components/Home'
+import LoginScreen from './components/Login'
+import AddShow from './components/AddShow'
 
 function App() {
   return (
